@@ -118,10 +118,44 @@ def portaXor():
 #portaAnd()
 #exec()
 
-def test():
-    print(target)
+def elev(b, e):
+    aux = b
+    for i in range(e-1):
+        aux = (aux * b)
+    #print('elev:', aux)
+    return aux
+
+def targ(opn, n):
+    global target
+    if opn == '1':
+        saida = [1] * n
+        saida[0] = 0
+    else:
+        saida = [0] * n
+        saida[n-1] = 1
+    target = saida
+    print('target:', target)
+    
+
+def gerador_binario_matriz(n):
+    if n <= 0:
+        return [[]]
+    else:
+        prev_combinations = gerador_binario_matriz(n - 1)
+        new_combinations = []
+        for combination in prev_combinations:
+            new_combinations.append(combination + [0])
+            new_combinations.append(combination + [1])
+        return new_combinations
+
+def menu_gerador_matriz(n):
+    os.system('cls' if os.name == 'nt' else 'clear')
+    global entradas
+    combinations = gerador_binario_matriz(n)
+    entradas = combinations
     for i in entradas:
         print(i)
+    
 
 def person():
     global linhs
@@ -150,17 +184,19 @@ def person():
 
 def painel():
     #print('predefinição de Assets \n 1: or \n 2: and \n 3: personalizado\n :')
-    option = input('predefinição de Assets \n 1: or \n 2: and \n 3: xor \n 4: personalizado\n :')
+    option = input('predefinição de Assets \n 1: or \n 2: and \n 3: personalizado\n :')
     match option:
         case '1':
+            opn = int(input('Quantas entradas ( 1 < ):'))
+            menu_gerador_matriz(opn)
+            targ(option, elev(2, opn))
             exec()
         case '2':
-            portaAnd()
+            opn = int(input('Quantas entradas:'))
+            menu_gerador_matriz(opn)
+            targ(option, elev(2, opn))
             exec()
         case '3':
-            
-            exec()
-        case '4':
             person()
             exec()
 painel()
