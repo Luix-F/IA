@@ -192,7 +192,7 @@ def painel():
             targ(option, elev(2, opn))
             exec()
         case '2':
-            opn = int(input('Quantas entradas:'))
+            opn = int(input('Quantas entradas ( 1 < ):'))
             menu_gerador_matriz(opn)
             targ(option, elev(2, opn))
             exec()
