@@ -41,9 +41,6 @@ def corrigirPesos(a, err):
         novoPesos[i] = pesos[i] + 0.2 * err * entradas[a][i]
     novoPesosBias = pesoBias + 0.2 * err * bias
     
-    
-    
-
     pesoBias = novoPesosBias
     for i in range(coluns):
         pesos[i] = novoPesos[i]
@@ -69,20 +66,26 @@ linhs = len(entradas)
 #acrecimo = [0]
 
 
-def aleatorio():
+def aleatorio(n):
     global pesos
     global pesoBias
-    for i in range(len(pesos)):
-        pesos[i] = random.uniform(-1, 1)
-    pesoBias = random.uniform(-1, 1)
+    p = [0] *n
+    for i in range(n):
+        p[i] = 0.2#random.uniform(-1, 1)
+    pesos = p
+    pesoBias = 0.2#random.uniform(-1, 1)
 
 
 
 
-def exec():
-    aleatorio()
+
+def exec(n):
     global linhs
     global pesoBias
+    global coluns
+    coluns = len(entradas[0])
+    linhs = len(entradas)
+    aleatorio(n)
     contador = 1
     saida = True
     while saida:
@@ -149,10 +152,14 @@ def gerador_binario_matriz(n):
         return new_combinations
 
 def menu_gerador_matriz(n):
+    global coluns
+    global linhs
     os.system('cls' if os.name == 'nt' else 'clear')
     global entradas
     combinations = gerador_binario_matriz(n)
     entradas = combinations
+    coluns = len(entradas[0])
+    linhs = len(entradas)
     for i in entradas:
         print(i)
     
@@ -190,13 +197,13 @@ def painel():
             opn = int(input('Quantas entradas ( 1 < ):'))
             menu_gerador_matriz(opn)
             targ(option, elev(2, opn))
-            exec()
+            exec(int(opn))
         case '2':
             opn = int(input('Quantas entradas ( 1 < ):'))
             menu_gerador_matriz(opn)
             targ(option, elev(2, opn))
-            exec()
+            exec(int(opn))
         case '3':
             person()
-            exec()
+            exec(coluns)
 painel()
