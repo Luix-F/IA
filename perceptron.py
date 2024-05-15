@@ -71,9 +71,9 @@ def aleatorio(n):
     global pesoBias
     p = [0] *n
     for i in range(n):
-        p[i] = 0.2#random.uniform(-1, 1)
+        p[i] = random.uniform(-1, 1)
     pesos = p
-    pesoBias = 0.2#random.uniform(-1, 1)
+    pesoBias = random.uniform(-1, 1)
 
 
 
